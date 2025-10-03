@@ -15,7 +15,11 @@ const useDeviceDetection = () => {
     
     // Browser
     isChrome: false,
-    isSafari: false
+    isSafari: false,
+    isOpera: false,
+    isFirefox: false,
+    isEdge: false,
+    isBrave: false
   });
 
   useEffect(() => {
@@ -36,8 +40,12 @@ const useDeviceDetection = () => {
       isLinux: /linux/i.test(userAgent) || /linux/i.test(platform) || /x11/i.test(platform),
       
       // Browser
-      isChrome: /chrome/i.test(userAgent) && !/edge|edg/i.test(userAgent),
-      isSafari: /safari/i.test(userAgent) && !/chrome/i.test(userAgent)
+      isChrome: /chrome/i.test(userAgent) && !/edge|edg|opr|opera/i.test(userAgent),
+      isSafari: /safari/i.test(userAgent) && !/chrome/i.test(userAgent),
+      isOpera: /opr|opera/i.test(userAgent),
+      isFirefox: /firefox/i.test(userAgent),
+      isEdge: /edge|edg/i.test(userAgent),
+      isBrave: /brave/i.test(userAgent)
     };
     
     console.log('User Agent:', userAgent);

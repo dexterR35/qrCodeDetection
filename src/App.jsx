@@ -111,6 +111,10 @@ function App() {
 
   // Get browser name
   const getBrowserName = () => {
+    if (deviceInfo.isBrave) return 'Brave';
+    if (deviceInfo.isOpera) return 'Opera';
+    if (deviceInfo.isEdge) return 'Edge';
+    if (deviceInfo.isFirefox) return 'Firefox';
     if (deviceInfo.isChrome) return 'Chrome';
     if (deviceInfo.isSafari) return 'Safari';
     return 'Other Browser';
