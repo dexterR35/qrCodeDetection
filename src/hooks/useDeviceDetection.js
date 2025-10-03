@@ -1,15 +1,4 @@
 import { useState, useEffect } from 'react';
-import { 
-  isMobile, 
-  isTablet, 
-  isAndroid, 
-  isIOS, 
-  isWindows, 
-  isMacOS,
-  isLinux,
-  isChrome,
-  isSafari
-} from 'react-device-detect';
 
 const useDeviceDetection = () => {
   const [deviceInfo, setDeviceInfo] = useState({
@@ -30,23 +19,29 @@ const useDeviceDetection = () => {
   });
 
   useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const platform = navigator.platform.toLowerCase();
+    
+    // Manual detection
     const detectedInfo = {
       // Device Type
-      isMobile,
-      isTablet,
+      isMobile: /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent),
+      isTablet: /ipad|android(?!.*mobile)/i.test(userAgent),
       
       // Operating System
-      isAndroid,
-      isIOS,
-      isWindows,
-      isMacOS,
-      isLinux,
+      isAndroid: /android/i.test(userAgent),
+      isIOS: /iphone|ipad|ipod/i.test(userAgent),
+      isWindows: /windows|win32|win64/i.test(userAgent) || /windows/i.test(platform),
+      isMacOS: /macintosh|mac os x/i.test(userAgent) || /mac/i.test(platform),
+      isLinux: /linux/i.test(userAgent) || /linux/i.test(platform) || /x11/i.test(platform),
       
       // Browser
-      isChrome,
-      isSafari
+      isChrome: /chrome/i.test(userAgent) && !/edge|edg/i.test(userAgent),
+      isSafari: /safari/i.test(userAgent) && !/chrome/i.test(userAgent)
     };
     
+    console.log('User Agent:', userAgent);
+    console.log('Platform:', platform);
     console.log('Detected device info:', detectedInfo);
     setDeviceInfo(detectedInfo);
   }, []);

@@ -10,6 +10,30 @@ function App() {
 
   // Show appropriate download cards based on device
   const getDownloadCards = () => {
+    // macOS/iOS phones and tablets - show only Apple
+    if (deviceInfo.isMacOS || deviceInfo.isIOS) {
+      return {
+        title: 'This is Mac',
+        cards: [{
+          url: 'https://apps.apple.com/it/app/netbet-scommesse-sportive/id6443489319',
+          text: 'apple dw',
+          icon: '🍎'
+        }]
+      };
+    }
+    
+    // Windows/Android phones and tablets - show only Android
+    if (deviceInfo.isWindows || deviceInfo.isAndroid) {
+      return {
+        title: 'This is Windows',
+        cards: [{
+          url: 'https://www.netbet.it/external_cms/app/NETBET/app-netbet.apk',
+          text: 'android dw',
+          icon: '📱'
+        }]
+      };
+    }
+    
     // Linux - show both cards
     if (deviceInfo.isLinux) {
       return {
@@ -29,31 +53,22 @@ function App() {
       };
     }
     
-    // Android/Windows phones and tablets
-    if (deviceInfo.isAndroid || deviceInfo.isWindows || (deviceInfo.isMobile && deviceInfo.isChrome)) {
-      return {
-        title: 'This is Windows',
-        cards: [{
+    // Fallback for unknown devices - show both cards
+    return {
+      title: 'Unknown Device',
+      cards: [
+        {
           url: 'https://www.netbet.it/external_cms/app/NETBET/app-netbet.apk',
           text: 'android dw',
           icon: '📱'
-        }]
-      };
-    }
-    
-    // iOS/macOS phones and tablets
-    if (deviceInfo.isIOS || deviceInfo.isMacOS || (deviceInfo.isMobile && deviceInfo.isSafari)) {
-      return {
-        title: 'This is Mac',
-        cards: [{
+        },
+        {
           url: 'https://apps.apple.com/it/app/netbet-scommesse-sportive/id6443489319',
           text: 'apple dw',
           icon: '🍎'
-        }]
-      };
-    }
-    
-    return null;
+        }
+      ]
+    };
   };
 
   const downloadData = getDownloadCards();
