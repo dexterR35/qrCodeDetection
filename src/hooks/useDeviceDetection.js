@@ -30,7 +30,7 @@ const useDeviceDetection = () => {
   });
 
   useEffect(() => {
-    setDeviceInfo({
+    const detectedInfo = {
       // Device Type
       isMobile,
       isTablet,
@@ -45,7 +45,10 @@ const useDeviceDetection = () => {
       // Browser
       isChrome,
       isSafari
-    });
+    };
+    
+    console.log('Detected device info:', detectedInfo);
+    setDeviceInfo(detectedInfo);
   }, []);
 
   return deviceInfo;
