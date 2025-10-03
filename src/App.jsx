@@ -16,7 +16,7 @@ function App() {
         title: 'This is Mac',
         cards: [{
           url: 'https://apps.apple.com/it/app/netbet-scommesse-sportive/id6443489319',
-          text: 'apple dw',
+          text: 'apple dw and scan qr',
           icon: '🍎'
         }]
       };
@@ -28,7 +28,7 @@ function App() {
         title: 'This is Windows',
         cards: [{
           url: 'https://www.netbet.it/external_cms/app/NETBET/app-netbet.apk',
-          text: 'android dw',
+          text: 'android dw and scan qr',
           icon: '📱'
         }]
       };
@@ -41,12 +41,12 @@ function App() {
         cards: [
           {
             url: 'https://www.netbet.it/external_cms/app/NETBET/app-netbet.apk',
-            text: 'android dw',
+            text: 'android dw and scan qr',
             icon: '📱'
           },
           {
             url: 'https://apps.apple.com/it/app/netbet-scommesse-sportive/id6443489319',
-            text: 'apple dw',
+            text: 'apple dw and scan qr',
             icon: '🍎'
           }
         ]
@@ -59,12 +59,12 @@ function App() {
       cards: [
         {
           url: 'https://www.netbet.it/external_cms/app/NETBET/app-netbet.apk',
-          text: 'android dw',
+          text: 'android dw and scan qr',
           icon: '📱'
         },
         {
           url: 'https://apps.apple.com/it/app/netbet-scommesse-sportive/id6443489319',
-          text: 'apple dw',
+          text: 'apple dw and scan qr',
           icon: '🍎'
         }
       ]
@@ -109,11 +109,19 @@ function App() {
     );
   }
 
+  // Get browser name
+  const getBrowserName = () => {
+    if (deviceInfo.isChrome) return 'Chrome';
+    if (deviceInfo.isSafari) return 'Safari';
+    return 'Other Browser';
+  };
+
   return (
     <div className="app">
       <main className="app-main">
         <div className="device-info">
           <h1 className="device-title">{downloadData.title}</h1>
+          <p className="browser-name">Browser: {getBrowserName()}</p>
         </div>
         <div className="download-cards-container">
           {downloadData.cards.map((card, index) => (
